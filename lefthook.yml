@@ -1,0 +1,20 @@
+pre-commit:
+  parallel: false
+  commands:
+    format-java:
+      run: ./gradlew spotlessApply
+      glob: "**/*.java"
+
+pre-push:
+  parallel: false
+  commands:
+    verify-format:
+      run: ./gradlew spotlessCheck
+
+    verify-build:
+      run: ./gradlew check
+
+commit-msg:
+  commands:
+    check-commit-format:
+      run: bash ./scripts/verify-commit-msg.sh {1}
